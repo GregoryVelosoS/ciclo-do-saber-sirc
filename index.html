@@ -123,8 +123,6 @@ footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--mute
 .big-store a small{font-weight:500;font-size:.85rem;opacity:.9}
 .lock{display:flex;gap:12px;align-items:flex-start;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .lock b{display:block}
-.owner{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--warn);color:#071a1d;font-weight:600;font-size:.9rem}
-.owner .wrap{padding-block:8px}
 .after{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
 @media (min-width:700px){.after{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .after a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
@@ -166,7 +164,6 @@ footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--mute
   </div>
 </div>
 
-<div class="owner" id="aviso-dono" hidden><div class="wrap">Prévia do organizador: os participantes veem só a foto e “Antes de começar” até 26/11.</div></div>
 <div id="completo" hidden>
 <header class="hero">
   <div class="wrap">
@@ -425,11 +422,10 @@ Entregue no formato SKILL.md, com name e description no topo.</pre>
   /* Prévia do facilitador: acrescente ?previa ao endereço para abrir a página completa a qualquer momento. */
   var chave = /(^|[?&])previa(=|&|$)/.test(location.search);
   var dono = false, aberto = null;
-  var previa = document.getElementById('previa'), completo = document.getElementById('completo'), aviso = document.getElementById('aviso-dono');
+  var previa = document.getElementById('previa'), completo = document.getElementById('completo');
   function conferir(){
     var agora = Date.now(), noDia = agora >= ABRE, naJanela = agora >= JANELA_INI && agora < JANELA_FIM;
     var abrir = noDia || naJanela || dono || chave;
-    aviso.hidden = !((dono || chave) && !noDia && !naJanela);
     if (abrir !== aberto) {
       previa.hidden = abrir; completo.hidden = !abrir;
       if (abrir && location.hash) { var el = document.getElementById(location.hash.slice(1)); if (el) el.scrollIntoView(); }
