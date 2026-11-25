@@ -422,12 +422,14 @@ Entregue no formato SKILL.md, com name e description no topo.</pre>
   var ABRE = new Date('2026-11-26T00:00:00-03:00').getTime();
   /* Prévia aberta a todos: 25/11/2026, das 8h31 às 11h31 (Brasília). */
   var JANELA_INI = new Date('2026-11-25T08:31:00-03:00').getTime(), JANELA_FIM = new Date('2026-11-25T11:31:00-03:00').getTime();
+  /* Prévia do facilitador: acrescente ?previa ao endereço para abrir a página completa a qualquer momento. */
+  var chave = /(^|[?&])previa(=|&|$)/.test(location.search);
   var dono = false, aberto = null;
   var previa = document.getElementById('previa'), completo = document.getElementById('completo'), aviso = document.getElementById('aviso-dono');
   function conferir(){
     var agora = Date.now(), noDia = agora >= ABRE, naJanela = agora >= JANELA_INI && agora < JANELA_FIM;
-    var abrir = noDia || naJanela || dono;
-    aviso.hidden = !(dono && !noDia && !naJanela);
+    var abrir = noDia || naJanela || dono || chave;
+    aviso.hidden = !((dono || chave) && !noDia && !naJanela);
     if (abrir !== aberto) {
       previa.hidden = abrir; completo.hidden = !abrir;
       if (abrir && location.hash) { var el = document.getElementById(location.hash.slice(1)); if (el) el.scrollIntoView(); }
