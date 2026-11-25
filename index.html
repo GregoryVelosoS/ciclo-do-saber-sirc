@@ -44,6 +44,12 @@ nav.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar
 nav.tabs .wrap::-webkit-scrollbar{display:none}
 nav.tabs a{flex:0 0 auto;text-decoration:none;color:var(--fg);font-weight:600;font-size:.9rem;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2)}
 nav.tabs a:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tema{flex:0 0 auto;margin-left:auto;display:inline-flex;align-items:center;gap:7px;cursor:pointer;color:var(--fg);font-family:var(--f-body);font-weight:600;font-size:.9rem;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2)}
+.tema svg{width:17px;height:17px;flex:0 0 auto}
+.tema .sol{display:none}
+:root[data-theme="light"] .tema .sol{display:block}
+:root[data-theme="light"] .tema .lua{display:none}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .tema .sol{display:block}:root:not([data-theme="dark"]) .tema .lua{display:none}}
 
 main{padding-block:8px 40px}
 section{padding-block:26px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
@@ -182,6 +188,11 @@ footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--mute
     <a href="#m4">4 · Segurança</a>
     <a href="#m5">5 · Ferramenta</a>
     <a href="#fim">Plano de ação</a>
+    <button class="tema" type="button" id="btn-tema" aria-pressed="false" title="Alternar entre modo claro e escuro">
+      <svg class="lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      <svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.0 4.0l1.6 1.6M18.4 18.4l1.6 1.6M2.6 12h2.2M19.2 12h2.2M4.0 20.0l1.6-1.6M18.4 5.6l1.6-1.6"/></svg>
+      <span class="rotulo">Modo claro</span>
+    </button>
   </div>
 </nav>
 
@@ -339,8 +350,13 @@ Nunca: [o que a IA não deve fazer, por exemplo inventar preço de tabela ou rep
 Entregue no formato SKILL.md, com name e description no topo.</pre>
 <div class="hint">Para que a skill funcione, ligue "Criar e editar arquivos" nas Configurações. No Claude, salve a skill quando ele oferecer ou envie o arquivo em Configurações › Personalizar › Skills. No ChatGPT (planos empresariais) ela fica em Plugins › Skills; no Gemini, crie uma Habilidade e cole o mesmo texto.</div></div>
 
-  <h3>Exemplo de artefato</h3>
-  <p><a class="pendente" href="#" data-pendente="artefato de exemplo da edição SIRC">[A DEFINIR] Artefato de exemplo da edição SIRC</a> · uma ferramenta criada pelo Claude a partir de um único pedido. Opcional.</p>
+  <h3>Artefato: uma ferramenta criada na hora</h3>
+  <p>Não precisa de foto nem de anexo. Cole o comando e o Claude monta a ferramenta dentro da conversa, no seu celular. Funciona no plano gratuito.</p>
+  <div class="prompt"><div class="top"><span class="label">1 · Peça a calculadora</span><button class="copy" type="button">Copiar</button></div>
+<pre>Crie um artefato interativo para eu usar no celular: uma calculadora de comissão. Campos para eu digitar: valor do pedido, percentual de comissão e percentual de desconto concedido. Mostre o valor do pedido com desconto e quanto eu recebo de comissão, com números grandes e fáceis de ler.</pre></div>
+  <div class="prompt"><div class="top"><span class="label">2 · Refine na mesma conversa</span><button class="copy" type="button">Copiar</button></div>
+<pre>Agora deixe eu adicionar vários pedidos na mesma tela, um embaixo do outro, e mostre no topo o total de comissão do mês.</pre>
+<div class="hint">Peça o que faltar: "troque para reais com vírgula", "deixe os botões maiores", "some o imposto". Cada pedido refaz a ferramenta na hora.</div></div>
 
   <h3>Da foto à planilha e ao relatório</h3>
   <p>Fotografe as <b>3 pedidos</b> da folha impressa e envie, dentro do projeto:</p>
@@ -351,6 +367,22 @@ Entregue no formato SKILL.md, com name e description no topo.</pre>
 <div class="hint">Toque no arquivo para ver a pré-visualização. Baixar é opcional.</div></div>
   <div class="prompt"><div class="top"><span class="label">Opcional: checklist interativo</span><button class="copy" type="button">Copiar</button></div>
 <pre>Crie um checklist interativo de visita a lojista, em que eu possa marcar o que já fiz: mostruário, tabela vigente, pedido tirado, prazo acertado e data do próximo contato.</pre></div>
+
+  <h3>Conector: do pedido à apresentação no Canva</h3>
+  <p>Ligue o conector uma vez em <b>+ › Conectores › Canva</b> e entre com uma conta grátis do Canva. Depois é só pedir.</p>
+  <div class="prompt"><div class="top"><span class="label">Apresentação de status da semana</span><button class="copy" type="button">Copiar</button></div>
+<pre>Use o Canva para criar uma apresentação de status da semana para a minha representada: uma capa e um slide por pedido. Pedido 4471, Depósito Santa Rita: enviado há 14 dias, sem retorno. Pedido 4488, Casa do Construtor: aprovado, a faturar. Pedido 4492, Depósito Boa Vista: enviado há 9 dias, sem retorno. Visual limpo, em português.</pre></div>
+  <div class="prompt"><div class="top"><span class="label">Refine na mesma conversa</span><button class="copy" type="button">Copiar</button></div>
+<pre>Deixe o pedido 4471 em destaque vermelho e coloque a data na capa.</pre>
+<div class="hint">Se o conector não aparecer no app, ligue uma vez em claude.ai pelo navegador do celular. Sem Canva, peça a mesma apresentação como artefato: "monte isso como um painel que eu possa mostrar no celular".</div></div>
+
+  <h3>Rotinas: o mesmo pedido toda semana</h3>
+  <div class="prompt"><div class="top"><span class="label">Gratuito · cole nas instruções do projeto</span><button class="copy" type="button">Copiar</button></div>
+<pre>Quando eu escrever ROTINA DE SEGUNDA e colar minhas conversas da semana, devolva: pedidos sem retorno, cobranças a fazer e pendências por representada.</pre>
+<div class="hint">A rotina fica guardada no projeto. Toda segunda você escreve só as duas palavras e cola as conversas.</div></div>
+  <div class="prompt"><div class="top"><span class="label">Pago · tarefa agendada, roda sozinha</span><button class="copy" type="button">Copiar</button></div>
+<pre>Toda segunda às 8h, pesquise as novidades sobre a reforma tributária para a representação comercial e me entregue um resumo de 10 linhas com os links.</pre>
+<div class="hint">No ChatGPT: tarefas agendadas, nos planos pagos. No Gemini: ações programadas, inclusive no gratuito.</div></div>
 
   <h3>Escada de automação</h3>
   <p class="muted">Você sai daqui nos degraus em destaque.</p>
@@ -390,8 +422,8 @@ Entregue no formato SKILL.md, com name e description no topo.</pre>
   <p>Você vai receber por WhatsApp ou e-mail o kit completo: material em PDF, as 3 skills para instalar no computador, arquivos de conhecimento para o projeto e vídeos-tutoriais.</p>
   <h3>Depois do workshop</h3>
   <div class="after">
-    <a class="pendente" href="#" data-pendente="formulário de avaliação da edição SIRC"><b>[A DEFINIR] Avalie o workshop</b><small>Notas de 1 a 5 por tópico, dicas e sugestões. Leva dois minutos.</small></a>
-    <a class="pendente" href="#" data-pendente="ranking da edição SIRC"><b>[A DEFINIR] Ranking IA na Representação</b><small>Registre quanto tempo a IA economizou numa tarefa real e veja o ranking da turma.</small></a>
+    <a class="pendente" href="#" data-pendente="link do formulário de avaliação"><b>[A DEFINIR] Avalie o workshop</b><small>Notas de 1 a 5 por tópico, dicas e sugestões. Leva dois minutos.</small></a>
+    <a class="pendente" href="#" data-pendente="link do ranking"><b>[A DEFINIR] Ranking do desafio de 7 dias</b><small>Registre quanto tempo a IA economizou numa tarefa real e veja como está a turma.</small></a>
   </div>
   <h3>Para continuar aprendendo</h3>
   <ul>
@@ -412,6 +444,46 @@ Entregue no formato SKILL.md, com name e description no topo.</pre>
   </div>
 </footer>
 </div>
+
+<script>
+/* Alterna claro e escuro. Guarda a escolha no aparelho; sem escolha, segue o sistema. */
+(function(){
+  var raiz = document.documentElement, btn = document.getElementById('btn-tema');
+  if (!btn) return;
+  var rotulo = btn.querySelector('.rotulo');
+  function sistemaEscuro(){
+    try { return !window.matchMedia || !window.matchMedia('(prefers-color-scheme: light)').matches; }
+    catch(e){ return true; }
+  }
+  function escuroAgora(){
+    var t = raiz.getAttribute('data-theme');
+    return t ? t === 'dark' : sistemaEscuro();
+  }
+  function pintar(){
+    var escuro = escuroAgora();
+    if (rotulo) rotulo.textContent = escuro ? 'Modo claro' : 'Modo escuro';
+    btn.setAttribute('aria-pressed', escuro ? 'false' : 'true');
+    btn.setAttribute('aria-label', escuro ? 'Mudar para o modo claro' : 'Mudar para o modo escuro');
+  }
+  try {
+    var salvo = localStorage.getItem('tema');
+    if (salvo === 'dark' || salvo === 'light') raiz.setAttribute('data-theme', salvo);
+  } catch(e) {}
+  pintar();
+  btn.addEventListener('click', function(){
+    var novo = escuroAgora() ? 'light' : 'dark';
+    raiz.setAttribute('data-theme', novo);
+    try { localStorage.setItem('tema', novo); } catch(e) {}
+    pintar();
+  });
+  try {
+    var mq = window.matchMedia('(prefers-color-scheme: light)');
+    var aoMudar = function(){ if (!raiz.getAttribute('data-theme')) pintar(); };
+    if (mq.addEventListener) mq.addEventListener('change', aoMudar);
+    else if (mq.addListener) mq.addListener(aoMudar);
+  } catch(e) {}
+})();
+</script>
 
 <script>
 /* Libera a página completa em 26/11/2026 (horário de Brasília), durante a janela de prévia abaixo, ou para o dono do artefato. */
